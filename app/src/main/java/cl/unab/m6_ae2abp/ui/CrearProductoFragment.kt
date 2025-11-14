@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import cl.unab.m6_ae2abp.R
 import cl.unab.m6_ae2abp.databinding.FragmentCrearProductoBinding
-import cl.unab.m6_ae2abp.modelo.Producto
 import cl.unab.m6_ae2abp.viewmodel.ProductoViewModel
 
 class CrearProductoFragment : Fragment() {
@@ -31,7 +30,6 @@ class CrearProductoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnCancelar.setOnClickListener {
-            binding.tidtId.text?.clear()
             binding.tietNombre.text?.clear()
             binding.tietDescripcion.text?.clear()
             binding.tietPrecio.text?.clear()
@@ -39,19 +37,34 @@ class CrearProductoFragment : Fragment() {
             findNavController().navigate(R.id.action_crearProductoFragment_to_leerProductosFragment)
         }
 
-        binding.btnCrear.setOnClickListener {
-            val id = binding.tidtId.text.toString().toIntOrNull()
-            val nombre = binding.tietNombre.text.toString()
-            val descripcion = binding.tietDescripcion.text.toString()
-            val precio = binding.tietPrecio.text.toString().toIntOrNull()
-            val cantidad = binding.tietCantidad.text.toString().toIntOrNull()
+        // --- Inicia el nuevo flujo de creación ---
 
-            if (id != null && nombre.isNotEmpty() && descripcion.isNotEmpty() && precio != null && cantidad != null) {
-                val producto = Producto(id, nombre, descripcion, precio, cantidad)
-                viewModel.crearProducto(producto)
+        // Paso 2: Observa el LiveData que recibirá el siguiente ID.
+        // Esto se ejecutará DESPUÉS de que la llamada a la API en el ViewModel termine.
+        viewModel.siguienteId.observe(viewLifecycleOwner) { idRecibido ->
+            // Nos aseguramos de que el ID no sea nulo
+            if (idRecibido != null) {
+                val nombre = binding.tietNombre.text.toString()
+                val descripcion = binding.tietDescripcion.text.toString()
+                val precio = binding.tietPrecio.text.toString().toIntOrNull()
+                val cantidad = binding.tietCantidad.text.toString().toIntOrNull()
+
+                if (nombre.isNotEmpty() && descripcion.isNotEmpty() && precio != null && cantidad != null) {
+                    // Ahora que tenemos el ID, llamamos a crearProducto
+                    viewModel.crearProducto(idRecibido, nombre, descripcion, precio, cantidad)
+                } else {
+                    Toast.makeText(requireContext(), "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show()
+                }
             } else {
-                Toast.makeText(requireContext(), "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show()
+                // Esto se ejecutaría si la API falla al devolver un ID
+                Toast.makeText(requireContext(), "No se pudo obtener un ID para el producto", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        // Paso 1: Cuando el usuario hace click, simplemente pedimos que se obtenga el ID.
+        // La lógica de creación se moverá al observador de arriba.
+        binding.btnCrear.setOnClickListener {
+            viewModel.obtenerSiguienteId()
         }
 
         viewModel.creacionExitosa.observe(viewLifecycleOwner) { exitoso ->

@@ -75,8 +75,8 @@ class ActualizarProductoFragment : Fragment() {
                 binding.tidtId.setText(producto.id.toString())
                 binding.tietNombre.setText(producto.nombre)
                 binding.tietDescripcion.setText(producto.descripcion)
-                binding.tietPrecio.setText(producto.precio)
-                binding.tietCantidad.setText(producto.cantidad)
+                binding.tietPrecio.setText(producto.precio.toString())
+                binding.tietCantidad.setText(producto.cantidad.toString())
             } else {
                 binding.cvFormulario.isVisible = false
                 Toast.makeText(requireContext(), "Producto no encontrado", Toast.LENGTH_SHORT).show()
