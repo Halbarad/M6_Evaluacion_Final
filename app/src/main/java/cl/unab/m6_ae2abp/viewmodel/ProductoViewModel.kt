@@ -19,7 +19,7 @@ class ProductoViewModel : ViewModel() {
     private val _eliminacionExitosa = MutableLiveData<Boolean>()
     val eliminacionExitosa: LiveData<Boolean> = _eliminacionExitosa
     private val _productoEncontrado = MutableLiveData<Producto?>()
-    val productoEncontrada: LiveData<Producto?> = _productoEncontrado
+    val productoEncontrado: LiveData<Producto?> = _productoEncontrado
     private val _actualizacionExitosa = MutableLiveData<Boolean>()
     val actualizacionExitosa: LiveData<Boolean> = _actualizacionExitosa
     private val _siguienteId = MutableLiveData<Int?>()

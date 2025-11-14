@@ -4,30 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import cl.unab.m6_ae2abp.R
 import cl.unab.m6_ae2abp.databinding.ItemProductoBinding
 import cl.unab.m6_ae2abp.modelo.Producto
 import cl.unab.m6_ae2abp.viewmodel.ProductoViewModel
 
 class ProductoAdapter(private var productos: List<Producto>, private val viewModel: ProductoViewModel) : RecyclerView.Adapter<ProductoAdapter.ProductoViewHolder>() {
 
-    inner class ProductoViewHolder(private val binding: ItemProductoBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(producto: Producto) {
-            binding.tvId.text = producto.id.toString()
-            binding.tvNombre.text = producto.nombre
-            binding.tvDescripcion.text = producto.descripcion
-            binding.tvPrecio.text = producto.precio.toString()
-            binding.tvCantidad.text = producto.cantidad.toString()
-
-            binding.btnEditar.setOnClickListener {
-                it.findNavController().navigate(R.id.action_leerProductosFragment_to_actualizarProductoFragment)
-            }
-
-            binding.btnEliminar.setOnClickListener {
-                viewModel.eliminarProducto(producto.id)
-            }
-        }
-    }
+    inner class ProductoViewHolder(val binding: ItemProductoBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductoViewHolder {
         val binding = ItemProductoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -35,7 +18,27 @@ class ProductoAdapter(private var productos: List<Producto>, private val viewMod
     }
 
     override fun onBindViewHolder(holder: ProductoViewHolder, position: Int) {
-        holder.bind(productos[position])
+        val producto = productos[position]
+
+        holder.binding.apply {
+            tvId.text = producto.id.toString()
+            tvNombre.text = producto.nombre
+            tvDescripcion.text = producto.descripcion
+            tvPrecio.text = producto.precio.toString()
+            tvCantidad.text = producto.cantidad.toString()
+
+            btnEditar.setOnClickListener {
+                val action = LeerProductosFragmentDirections
+                    .actionLeerProductosFragmentToActualizarProductoFragment(producto)
+                it.findNavController().navigate(action)
+            }
+
+            btnEliminar.setOnClickListener {
+                producto.id?.let {
+                    viewModel.eliminarProducto(it)
+                }
+            }
+        }
     }
 
     override fun getItemCount(): Int {

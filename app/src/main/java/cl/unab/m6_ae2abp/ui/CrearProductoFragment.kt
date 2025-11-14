@@ -37,10 +37,6 @@ class CrearProductoFragment : Fragment() {
             findNavController().navigate(R.id.action_crearProductoFragment_to_leerProductosFragment)
         }
 
-        // --- Inicia el nuevo flujo de creación ---
-
-        // Paso 2: Observa el LiveData que recibirá el siguiente ID.
-        // Esto se ejecutará DESPUÉS de que la llamada a la API en el ViewModel termine.
         viewModel.siguienteId.observe(viewLifecycleOwner) { idRecibido ->
             // Nos aseguramos de que el ID no sea nulo
             if (idRecibido != null) {
@@ -50,19 +46,15 @@ class CrearProductoFragment : Fragment() {
                 val cantidad = binding.tietCantidad.text.toString().toIntOrNull()
 
                 if (nombre.isNotEmpty() && descripcion.isNotEmpty() && precio != null && cantidad != null) {
-                    // Ahora que tenemos el ID, llamamos a crearProducto
                     viewModel.crearProducto(idRecibido, nombre, descripcion, precio, cantidad)
                 } else {
                     Toast.makeText(requireContext(), "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show()
                 }
             } else {
-                // Esto se ejecutaría si la API falla al devolver un ID
                 Toast.makeText(requireContext(), "No se pudo obtener un ID para el producto", Toast.LENGTH_SHORT).show()
             }
         }
 
-        // Paso 1: Cuando el usuario hace click, simplemente pedimos que se obtenga el ID.
-        // La lógica de creación se moverá al observador de arriba.
         binding.btnCrear.setOnClickListener {
             viewModel.obtenerSiguienteId()
         }

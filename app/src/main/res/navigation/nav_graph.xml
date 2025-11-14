@@ -31,6 +31,9 @@
         android:name="cl.unab.m6_ae2abp.ui.ActualizarProductoFragment"
         android:label="fragment_actualizar_producto"
         tools:layout="@layout/fragment_actualizar_producto" >
+        <argument
+            android:name="producto"
+            app:argType="cl.unab.m6_ae2abp.modelo.Producto" />
         <action
             android:id="@+id/action_actualizarProductoFragment_to_leerProductosFragment"
             app:destination="@id/leerProductosFragment" />

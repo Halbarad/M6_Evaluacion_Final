@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import cl.unab.m6_ae2abp.R
 import cl.unab.m6_ae2abp.databinding.FragmentLeerProductosBinding
 import cl.unab.m6_ae2abp.viewmodel.ProductoViewModel
@@ -33,12 +32,10 @@ class LeerProductosFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Initialize Adapter and RecyclerView
         productoAdapter = ProductoAdapter(emptyList(), viewModel)
         binding.rvProductos.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvProductos.adapter = productoAdapter
 
-        // Observe LiveData from ViewModel
         viewModel.productos.observe(viewLifecycleOwner) { producto ->
             productoAdapter.updateProductos(producto)
         }
@@ -49,7 +46,6 @@ class LeerProductosFragment : Fragment() {
             }
         }
 
-        // Navigation to Create Fragment
         binding.btnCrearProducto.setOnClickListener {
             findNavController().navigate(R.id.action_leerProductosFragment_to_crearProductoFragment)
         }

@@ -13,21 +13,38 @@ import retrofit2.http.Path
 interface ProductoService {
 
     @GET("{user}/productos")
-    suspend fun leerProductos(@Path("user") user: String): List<Producto>
+    suspend fun leerProductos(
+        @Path("user") user: String
+    ): List<Producto>
 
     @GET("{user}/producto/{id}")
-    suspend fun leerProductoPorId(@Path("user") user: String, @Path("id") id: Int): Response<Producto>
-
-    @DELETE("{user}/productos/{id}")
-    suspend fun eliminarProducto(@Path("user") user: String, @Path("id") id: Int): Response<Unit>
+    suspend fun leerProductoPorId(
+        @Path("user") user: String,
+        @Path("id") id: Int
+    ): Response<Producto>
 
     @PUT("{user}/productos/{id}")
-    suspend fun actualizarProducto(@Path("user") user: String, @Path("id") id: Int, @Body producto: Producto): Response<Producto>
+    suspend fun actualizarProducto(
+        @Path("user") user: String,
+        @Path("id") id: Int,
+        @Body producto: Producto
+    ): Response<Producto>
+
+    @DELETE("{user}/productos/{id}")
+    suspend fun eliminarProducto(
+        @Path("user") user: String,
+        @Path("id") id: Int
+    ): Response<Unit>
 
     @POST("{user}/productos")
-    suspend fun crearProducto(@Path("user") user: String, @Body producto: Producto): Response<Producto>
+    suspend fun crearProducto(
+        @Path("user") user: String,
+        @Body producto: Producto
+    ): Response<Producto>
 
     @GET("{user}/productos/lastid")
-    suspend fun obtenerUltimoId(@Path("user") user: String): Response<SiguienteId>
+    suspend fun obtenerUltimoId(
+        @Path("user") user: String
+    ): Response<SiguienteId>
 
 }
