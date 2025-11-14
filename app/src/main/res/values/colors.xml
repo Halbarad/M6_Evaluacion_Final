@@ -2,7 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+<<<<<<< HEAD
     <color name="material_on_surface">#212121</color>
     <color name="material_error">#D32F2F</color>
     <color name="material_accent">#1976D2</color>
+=======
+>>>>>>> 947a498a266eca5417002272fdbdc3690f57dbbc
 </resources>

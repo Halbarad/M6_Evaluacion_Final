@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+<<<<<<< HEAD
     android:id="@+id/nav_graph"
     app:startDestination="@id/usuariosListFragment">
 
@@ -36,3 +37,40 @@
         app:destination="@id/usuarioDetailFragment" />
 
 </navigation>
+=======
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/leerProductosFragment">
+
+    <fragment
+        android:id="@+id/leerProductosFragment"
+        android:name="cl.unab.m6_ae2abp.ui.LeerProductosFragment"
+        android:label="fragment_leer_productos"
+        tools:layout="@layout/fragment_leer_productos" >
+        <action
+            android:id="@+id/action_leerProductosFragment_to_crearProductoFragment"
+            app:destination="@id/crearProductoFragment" />
+        <action
+            android:id="@+id/action_leerProductosFragment_to_actualizarProductoFragment"
+            app:destination="@id/actualizarProductoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/crearProductoFragment"
+        android:name="cl.unab.m6_ae2abp.ui.CrearProductoFragment"
+        android:label="fragment_crear_producto"
+        tools:layout="@layout/fragment_crear_producto" >
+        <action
+            android:id="@+id/action_crearProductoFragment_to_leerProductosFragment"
+            app:destination="@id/leerProductosFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/actualizarProductoFragment"
+        android:name="cl.unab.m6_ae2abp.ui.ActualizarProductoFragment"
+        android:label="fragment_actualizar_producto"
+        tools:layout="@layout/fragment_actualizar_producto" >
+        <action
+            android:id="@+id/action_actualizarProductoFragment_to_leerProductosFragment"
+            app:destination="@id/leerProductosFragment" />
+    </fragment>
+</navigation>
+>>>>>>> 947a498a266eca5417002272fdbdc3690f57dbbc

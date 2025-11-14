@@ -19,6 +19,10 @@ dependencyResolutionManagement {
     }
 }
 
+<<<<<<< HEAD
 rootProject.name = "AE2_ABPRO1_-_Grupo_1"
+=======
+rootProject.name = "M6_AE2ABP"
+>>>>>>> 947a498a266eca5417002272fdbdc3690f57dbbc
 include(":app")
  
