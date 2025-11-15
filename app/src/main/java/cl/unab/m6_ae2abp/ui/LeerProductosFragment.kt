@@ -49,6 +49,10 @@ class LeerProductosFragment : Fragment() {
         binding.btnCrearProducto.setOnClickListener {
             findNavController().navigate(R.id.action_leerProductosFragment_to_crearProductoFragment)
         }
+
+        binding.btnRoom.setOnClickListener {
+            findNavController().navigate(R.id.action_leerProductosFragment_to_leerRoomFragment)
+        }
     }
 
     override fun onDestroyView() {

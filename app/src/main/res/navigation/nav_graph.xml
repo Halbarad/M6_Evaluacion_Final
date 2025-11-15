@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_leerProductosFragment_to_actualizarProductoFragment"
             app:destination="@id/actualizarProductoFragment" />
+        <action
+            android:id="@+id/action_leerProductosFragment_to_leerRoomFragment"
+            app:destination="@id/leerRoomFragment" />
     </fragment>
     <fragment
         android:id="@+id/crearProductoFragment"
@@ -36,6 +39,14 @@
             app:argType="cl.unab.m6_ae2abp.modelo.Producto" />
         <action
             android:id="@+id/action_actualizarProductoFragment_to_leerProductosFragment"
+            app:destination="@id/leerProductosFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/leerRoomFragment"
+        android:name="cl.unab.m6_ae2abp.ui.LeerRoomFragment"
+        android:label="LeerRoomFragment" >
+        <action
+            android:id="@+id/action_leerRoomFragment_to_leerProductosFragment"
             app:destination="@id/leerProductosFragment" />
     </fragment>
 </navigation>
