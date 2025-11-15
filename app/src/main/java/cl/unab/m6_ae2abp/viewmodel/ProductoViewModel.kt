@@ -9,9 +9,10 @@ import cl.unab.m6_ae2abp.modelo.Producto
 import cl.unab.m6_ae2abp.repositorio.ProductoRepository
 import kotlinx.coroutines.launch
 
-class ProductoViewModel : ViewModel() {
+class ProductoViewModel(
+    private val repository: ProductoRepository = ProductoRepository()
+) : ViewModel() {
 
-    private val repository = ProductoRepository()
     private val _productos = MutableLiveData<List<Producto>>()
     val productos: LiveData<List<Producto>> = _productos
     private val _creacionExitosa = MutableLiveData<Boolean>()
