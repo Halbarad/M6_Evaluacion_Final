@@ -9,7 +9,7 @@
         android:id="@+id/leerProductosFragment"
         android:name="cl.unab.m6_ae2abp.ui.LeerProductosFragment"
         android:label="fragment_leer_productos"
-        tools:layout="@layout/fragment_leer_productos" >
+        tools:layout="@layout/fragment_leer_productos">
         <action
             android:id="@+id/action_leerProductosFragment_to_crearProductoFragment"
             app:destination="@id/crearProductoFragment" />
@@ -24,7 +24,7 @@
         android:id="@+id/crearProductoFragment"
         android:name="cl.unab.m6_ae2abp.ui.CrearProductoFragment"
         android:label="fragment_crear_producto"
-        tools:layout="@layout/fragment_crear_producto" >
+        tools:layout="@layout/fragment_crear_producto">
         <action
             android:id="@+id/action_crearProductoFragment_to_leerProductosFragment"
             app:destination="@id/leerProductosFragment" />
@@ -33,7 +33,7 @@
         android:id="@+id/actualizarProductoFragment"
         android:name="cl.unab.m6_ae2abp.ui.ActualizarProductoFragment"
         android:label="fragment_actualizar_producto"
-        tools:layout="@layout/fragment_actualizar_producto" >
+        tools:layout="@layout/fragment_actualizar_producto">
         <argument
             android:name="producto"
             app:argType="cl.unab.m6_ae2abp.modelo.Producto" />
@@ -44,9 +44,36 @@
     <fragment
         android:id="@+id/leerRoomFragment"
         android:name="cl.unab.m6_ae2abp.ui.LeerRoomFragment"
-        android:label="LeerRoomFragment" >
+        android:label="LeerRoomFragment">
         <action
             android:id="@+id/action_leerRoomFragment_to_leerProductosFragment"
             app:destination="@id/leerProductosFragment" />
+        <action
+            android:id="@+id/action_leerRoomFragment_to_crearRoomFragment"
+            app:destination="@id/crearRoomFragment" />
+        <action
+            android:id="@+id/action_leerRoomFragment_to_actualizarRoomFragment"
+            app:destination="@id/actualizarRoomFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/actualizarRoomFragment"
+        android:name="cl.unab.m6_ae2abp.ui.ActualizarRoomFragment"
+        android:label="fragment_actualizar_room"
+        tools:layout="@layout/fragment_actualizar_room">
+        <action
+            android:id="@+id/action_actualizarRoomFragment_to_leerRoomFragment"
+            app:destination="@id/leerRoomFragment" />
+        <argument
+            android:name="producto"
+            app:argType="cl.unab.m6_ae2abp.modelo.ProductoRoom" />
+    </fragment>
+    <fragment
+        android:id="@+id/crearRoomFragment"
+        android:name="cl.unab.m6_ae2abp.ui.CrearRoomFragment"
+        android:label="fragment_crear_room"
+        tools:layout="@layout/fragment_crear_room">
+        <action
+            android:id="@+id/action_crearRoomFragment_to_leerRoomFragment"
+            app:destination="@id/leerRoomFragment" />
     </fragment>
 </navigation>

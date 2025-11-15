@@ -8,9 +8,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import cl.unab.m6_ae2abp.R
 import cl.unab.m6_ae2abp.databinding.FragmentLeerProductosBinding
+import cl.unab.m6_ae2abp.ui.adaptador.ProductoAdapter
 import cl.unab.m6_ae2abp.viewmodel.ProductoViewModel
 
 class LeerProductosFragment : Fragment() {
@@ -33,7 +34,7 @@ class LeerProductosFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         productoAdapter = ProductoAdapter(emptyList(), viewModel)
-        binding.rvProductos.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.rvProductos.layoutManager = LinearLayoutManager(requireContext())
         binding.rvProductos.adapter = productoAdapter
 
         viewModel.productos.observe(viewLifecycleOwner) { producto ->

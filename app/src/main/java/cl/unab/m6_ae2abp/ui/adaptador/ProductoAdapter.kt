@@ -1,4 +1,4 @@
-package cl.unab.m6_ae2abp.ui
+package cl.unab.m6_ae2abp.ui.adaptador
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,6 +6,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import cl.unab.m6_ae2abp.databinding.ItemProductoBinding
 import cl.unab.m6_ae2abp.modelo.Producto
+import cl.unab.m6_ae2abp.ui.LeerProductosFragmentDirections
 import cl.unab.m6_ae2abp.viewmodel.ProductoViewModel
 
 class ProductoAdapter(private var productos: List<Producto>, private val viewModel: ProductoViewModel) : RecyclerView.Adapter<ProductoAdapter.ProductoViewHolder>() {

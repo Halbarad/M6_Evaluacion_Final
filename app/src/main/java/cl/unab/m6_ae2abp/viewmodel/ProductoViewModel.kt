@@ -3,15 +3,16 @@ package cl.unab.m6_ae2abp.viewmodel
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cl.unab.m6_ae2abp.modelo.Producto
 import cl.unab.m6_ae2abp.repositorio.ProductoRepository
 import kotlinx.coroutines.launch
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 
-class ProductoViewModel(
-    private val repository: ProductoRepository
-) : ViewModel() {
+class ProductoViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val repository: ProductoRepository = ProductoRepository()
 
     private val _productos = MutableLiveData<List<Producto>>()
     val productos: LiveData<List<Producto>> = _productos
@@ -27,10 +28,8 @@ class ProductoViewModel(
     val siguienteId: LiveData<Int?> = _siguienteId
 
     init {
-        obtenerProductos() // O podrías llamar a obtenerProductosDesdeDb() por defecto
+        obtenerProductos()
     }
-
-    // Funciones para la API Remota (Retrofit)
 
     fun obtenerProductos() {
         viewModelScope.launch {
@@ -133,65 +132,4 @@ class ProductoViewModel(
         }
     }
 
-    // Funciones para la Base de Datos Local (Room)
-
-    fun obtenerProductosDesdeDb() {
-        viewModelScope.launch {
-            try {
-                _productos.postValue(repository.obtenerProductosDesdeDb())
-            } catch (e: Exception) {
-                Log.e("ProductoViewModel", "Error al obtener productos desde DB", e)
-                _productos.postValue(emptyList())
-            }
-        }
-    }
-
-    fun buscarProductoPorIdDesdeDb(id: Int) {
-        viewModelScope.launch {
-            try {
-                _productoEncontrado.postValue(repository.obtenerProductoPorIdDesdeDb(id))
-            } catch (e: Exception) {
-                _productoEncontrado.postValue(null)
-            }
-        }
-    }
-
-    fun insertarProductoEnDb(producto: Producto) {
-        viewModelScope.launch {
-            try {
-                repository.insertarProductoEnDb(producto)
-                _creacionExitosa.postValue(true)
-                obtenerProductosDesdeDb()
-            } catch (e: Exception) {
-                _creacionExitosa.postValue(false)
-                Log.e("ProductoViewModel", "Excepción al insertar producto en DB", e)
-            }
-        }
-    }
-
-    fun actualizarProductoEnDb(producto: Producto) {
-        viewModelScope.launch {
-            try {
-                repository.actualizarProductoEnDb(producto)
-                _actualizacionExitosa.postValue(true)
-                obtenerProductosDesdeDb()
-            } catch (e: Exception) {
-                _actualizacionExitosa.postValue(false)
-                Log.e("ProductoViewModel", "Excepción al actualizar producto en DB", e)
-            }
-        }
-    }
-
-    fun eliminarProductoEnDb(producto: Producto) {
-        viewModelScope.launch {
-            try {
-                repository.eliminarProductoEnDb(producto)
-                _eliminacionExitosa.postValue(true)
-                obtenerProductosDesdeDb()
-            } catch (e: Exception) {
-                _eliminacionExitosa.postValue(false)
-                Log.e("ProductoViewModel", "Excepción al eliminar producto en DB", e)
-            }
-        }
-    }
 }
