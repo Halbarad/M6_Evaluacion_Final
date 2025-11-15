@@ -54,7 +54,7 @@ class ActualizarProductoFragment : Fragment() {
             val precio = binding.tietPrecio.text.toString().toIntOrNull()
             val cantidad = binding.tietCantidad.text.toString().toIntOrNull()
 
-            if (id != null && nombre.isNotEmpty() && descripcion.isNotEmpty() && precio != null && cantidad != null) {
+            if (nombre.isNotEmpty() && descripcion.isNotEmpty() && precio != null && cantidad != null) {
                 val productoActualizado = Producto(id, nombre, descripcion, precio, cantidad)
                 viewModel.actualizarProducto(id, productoActualizado)
             } else {
