@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("androidx.navigation.safeargs")
     id("org.jetbrains.kotlin.plugin.parcelize")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -70,6 +71,13 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     // Convertir JSON a objetos Kotlin
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    // Room
+    implementation("androidx.room:room-runtime:2.8.1")
+    // Kotlin Symbol Processing (KSP)
+    ksp("androidx.room:room-compiler:2.8.1")
+    // Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:2.8.1")
+
 
     // AndroidX Test
     androidTestImplementation("androidx.test.ext:junit-ktx:1.1.5")
